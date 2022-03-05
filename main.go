@@ -14,14 +14,14 @@ func main() {
 		projectName := path.Base(args[0])
 		fmt.Printf("Available commands for %s: \n search => search books\n list => list all books\n buy => buy a book\n delete => delete a book\n", projectName)
 	} else {
-		switch command, commandArgs := args[1], args[2:]; {
-		case command == "list":
+		switch command, commandArgs := args[1], args[2:]; command {
+		case "list":
 			list()
-		case command == "search":
+		case "search":
 			search(commandArgs)
-		case command == "buy":
+		case "buy":
 			buy(commandArgs)
-		case command == "delete":
+		case "delete":
 			deleteBook(commandArgs)
 		default:
 			fmt.Println("Invalid command.")
