@@ -112,7 +112,7 @@ func (book Book) String() string {
 func (book Book) matches(term string) bool {
 	fieldsToCheck := []string{strings.ToLower(book.Name), strings.ToLower(book.Author.Name), strings.ToLower(book.StockCode)}
 	for _, field := range fieldsToCheck {
-		if strings.Contains(field, term) {
+		if strings.Contains(field, strings.ToLower(term)) {
 			return true
 		}
 	}
