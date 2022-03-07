@@ -8,17 +8,17 @@ import (
 	"time"
 )
 
-var idCount uint = 0
+var idCount = 0
 var books []Book
 
 type Book struct {
-	Id            uint
+	Id            int
 	Name          string
 	StockCode     string
-	ISBN          uint
-	NumberOfPages uint
+	ISBN          int
+	NumberOfPages int
 	Price         float64
-	Quantity      uint
+	Quantity      int
 	Author        Author
 	isDeleted     bool
 }
@@ -90,10 +90,10 @@ func Construct(name string, stockCode string, author Author) (Book, error) {
 		Id:            idCount,
 		Name:          name,
 		StockCode:     stockCode,
-		ISBN:          uint(isbn),
-		NumberOfPages: uint(numberOfPages),
+		ISBN:          int(isbn),
+		NumberOfPages: int(numberOfPages),
 		Price:         price,
-		Quantity:      uint(quantity),
+		Quantity:      int(quantity),
 		Author:        author,
 		isDeleted:     false,
 	}, nil
@@ -147,7 +147,7 @@ func List() []Book {
 }
 
 // buy decreases stock count. A Book can't be bought if there is not enough stock or deleted already.
-func (book *Book) buy(quantityToBuy uint) error {
+func (book *Book) buy(quantityToBuy int) error {
 	if book.Quantity < quantityToBuy {
 		return errors.New("there is not enough items in the stock")
 	} else if book.isDeleted {
@@ -159,7 +159,7 @@ func (book *Book) buy(quantityToBuy uint) error {
 }
 
 // Buy find the book with given id and buys it.
-func Buy(bookId, quantity uint) error {
+func Buy(bookId, quantity int) error {
 	foundBook, err := findBookById(bookId)
 	if err != nil {
 		return err
@@ -187,7 +187,7 @@ func (book *Book) Delete() error {
 
 // removeBookFromBookshelf removes the book with given id from the books slice and has no effect if no Book with given
 // id is not found.
-func removeBookFromBookshelf(id uint) {
+func removeBookFromBookshelf(id int) {
 	for i, book := range books {
 		if book.Id == id {
 			books = append(books[:i], books[i+1:]...)
@@ -196,7 +196,7 @@ func removeBookFromBookshelf(id uint) {
 }
 
 // findBookById returns the first book with given id in books.
-func findBookById(id uint) (Book, error) {
+func findBookById(id int) (Book, error) {
 	for _, book := range books {
 		if book.Id == id && !book.isDeleted {
 			return book, nil
@@ -207,7 +207,7 @@ func findBookById(id uint) (Book, error) {
 }
 
 // DeleteBookById deletes the first book with given id in books.
-func DeleteBookById(bookId uint) error {
+func DeleteBookById(bookId int) error {
 	book, err := findBookById(bookId)
 	if err != nil {
 		return err

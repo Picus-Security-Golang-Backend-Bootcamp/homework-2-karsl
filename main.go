@@ -71,7 +71,7 @@ func buy(args []string) {
 		return
 	}
 
-	err = library.Buy(uint(bookId), uint(quantity))
+	err = library.Buy(bookId, quantity)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -92,7 +92,7 @@ func deleteBook(args []string) {
 		return
 	}
 
-	err = library.DeleteBookById(uint(bookId))
+	err = library.DeleteBookById(bookId)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
